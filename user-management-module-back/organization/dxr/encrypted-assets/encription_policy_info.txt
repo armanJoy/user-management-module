@@ -1,0 +1,22 @@
+
+** Key generated using RSA algorithm. Generator function 
+
+	public KeyPair keyPairGenerator() {
+        KeyPairGenerator generator = null;
+        try {
+            generator = KeyPairGenerator.getInstance("RSA");
+        } catch (NoSuchAlgorithmException ex) {
+            // Logger.getLogger(UtilService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        generator.initialize(2048);
+        KeyPair pair = generator.generateKeyPair();
+
+        return pair;
+    }
+
+
+** Encryption  IV value is  -  public static final byte[] IV = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+** Encryption SALT value is   -  public static final String SALT = "msbd";
+
+

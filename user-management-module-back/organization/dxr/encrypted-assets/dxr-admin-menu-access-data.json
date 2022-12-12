@@ -1,0 +1,14 @@
+[
+    {
+        "companyId": "org00001",
+        "menuAccessInfo": [
+            {
+                "menuId": "systemAdmin",
+                "menuTitleEng": "DXR Admin",
+                "menuTitleJpn": "DXR Admin",
+                "menuUrl": "/system-admin",
+                "parentSegment": ""
+            }
+        ]
+    }
+]
