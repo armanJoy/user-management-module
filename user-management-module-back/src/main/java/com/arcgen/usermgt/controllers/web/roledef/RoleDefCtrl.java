@@ -1,13 +1,13 @@
 package com.arcgen.usermgt.controllers.web.roledef;
 
-import com.arcgen.usermgt.models.view.web.menudef.MenuDefVM;
-import com.arcgen.usermgt.models.view.web.menudef.MenuRoleAccessUpdate;
-import com.arcgen.usermgt.models.view.web.roledef.RoleMenusUpdate;
-import com.arcgen.usermgt.models.view.web.roledef.RoleWiseMenuAcccessInfoUpdate;
-import com.arcgen.usermgt.models.view.web.menudef.UserMenuAccessView;
-import com.arcgen.usermgt.models.view.web.roledef.DxrRoleView;
-import com.arcgen.usermgt.models.view.web.roledef.RoleWiseMenuAccessVM;
-import com.arcgen.usermgt.services.domainservices.web.roledef.RoleDefDomainService;
+import com.arcgen.usermgt.models.view.menudef.MenuDefVM;
+import com.arcgen.usermgt.models.view.menudef.MenuRoleAccessUpdate;
+import com.arcgen.usermgt.models.view.roledef.RoleMenusUpdate;
+import com.arcgen.usermgt.models.view.roledef.RoleWiseMenuAcccessInfoUpdate;
+import com.arcgen.usermgt.models.view.menudef.UserMenuAccessView;
+import com.arcgen.usermgt.models.view.roledef.DxrRoleView;
+import com.arcgen.usermgt.models.view.roledef.RoleWiseMenuAccessVM;
+import com.arcgen.usermgt.services.domainservices.roledef.RoleDefDomainService;
 import com.arcgen.usermgt.util.DateTimeService;
 import com.arcgen.usermgt.util.UtilService;
 import java.util.ArrayList;

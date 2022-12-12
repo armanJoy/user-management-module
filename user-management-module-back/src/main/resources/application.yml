@@ -1,30 +1,9 @@
 spring:
-  profiles: production-derby
-  datasource:
-    url: jdbc:derby:database/dxrdb;create=true
-    username: dxradmin
-    password: dxr1234
-
-reportUrl: http://localhost:8200/runReport
-sealSavePath: /home/ubuntu/DXR/seal-image/
-
-server:
-  address: 172.31.95.49
-  port: 443
-  http.port: 80
-  ssl:
-    key-store: ../sslkeys/29-01-2022/springboot_letsencrypt.p12 
-    key-store-password: dxr
-    keyStoreType: PKCS12
-    keyAlias: bootalias
----
-
-spring:
   profiles: production-psql
   datasource:
-    url: jdbc:postgresql://10.0.3.18:5432/dxrreleasedb?currentSchema=dxradmin
+    url: jdbc:postgresql://10.0.3.18:5432/appdb?currentSchema=appadmin
     username: postgres
-#    password: dxr1234
+#    password: joy1234
     password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -45,9 +24,6 @@ spring:
         stat: debug
     file:
         path: .
-
-reportUrl: http://localhost:8200/runReport
-sealSavePath: /home/ubuntu/DXR/seal-image/
 
 server:
   address: 172.31.95.49
@@ -58,87 +34,11 @@ server:
     key-store-password: dxr
     keyStoreType: PKCS12
     keyAlias: bootalias
----
-
-spring:
-  profiles: release-test-psql
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/productiontest?currentSchema=dxradmin
-    username: postgres
-    password: dxr1234
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: update
-#        generate_statistics: true
-        format_sql: true
-        jdbc: 
-          lob:
-            non_contextual_creation: true
-  logging:
-    level:
-    org:
-      hibernate:
-        type: trace
-        stat: debug
-    file:
-        path: .
-
-reportUrl: http://127.0.0.1:8200/runReport
-sealSavePath: /home/joy/Documents/dxr-seal-image/
-
-server:
-  address: 127.0.0.1  
-  port: 9000
----
-
-spring:
-  profiles: production-psql-clean-db
-  datasource:
-    url: jdbc:postgresql://10.0.3.18:5432/dxrdb?currentSchema=dxradmin
-    username: postgres
-#    password: dxr1234
-    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: update
-#        generate_statistics: true
-        format_sql: true
-        jdbc: 
-          lob:
-            non_contextual_creation: true
-  logging:
-    level:
-    org:
-      hibernate:
-        type: trace
-        stat: debug
-    file:
-        path: .
-
-reportUrl: http://localhost:8200/runReport
-sealSavePath: /home/ubuntu/DXR/seal-image/
-
-server:
-  address: 172.31.95.49
-  port: 8080
-#  http.port: 8080
-#  ssl:
-#    key-store: ../sslkeys/29-01-2022/springboot_letsencrypt.p12 
-#    key-store-password: dxr
-#    keyStoreType: PKCS12
-#    keyAlias: bootalias
 ---
 
 spring:
   profiles: internal-release-psql
   datasource:
-#    url: jdbc:postgresql://192.168.68.109:5432/dxrtestdb?currentSchema=dxradmin
     url: jdbc:postgresql://192.168.68.109:5432/dxrdb?currentSchema=dxradmin
     username: postgres
 #    password: dxr1234
@@ -163,9 +63,6 @@ spring:
     file:
         path: .
 
-reportUrl: http://127.0.0.1:8200/runReport
-sealSavePath: /home/joy/Documents/dxr-seal-image/
-
 server:
   address: 192.168.68.109
   port: 8000
@@ -173,25 +70,22 @@ server:
 
 spring:
   profiles: develop-psql
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/dxrdb?currentSchema=dxradmin
-#    url: jdbc:postgresql://127.0.0.1:5432/dxrtestdb?currentSchema=dxradmin
-#    url: jdbc:postgresql://172.31.95.49:5432/dxrreleasedb?currentSchema=dxradmin
-#    url: jdbc:postgresql://127.0.0.1:5432/productiontest?currentSchema=dxradmin
-    username: postgres
-#    password: dxr1234
-    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: update
-#        generate_statistics: true
-        format_sql: true
-        jdbc: 
-          lob:
-            non_contextual_creation: true
+#  datasource:
+#    url: jdbc:postgresql://127.0.0.1:5432/dxrdb?currentSchema=dxradmin
+#    username: postgres
+# #   password: dxr1234
+#    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+##    show-sql: true
+#    properties:
+#      hibernate:
+#        ddl-auto: update
+##        generate_statistics: true
+#        format_sql: true
+#        jdbc: 
+#          lob:
+#            non_contextual_creation: true
   logging:
     level:
     org:
@@ -201,15 +95,6 @@ spring:
     root: INFO
     file:
         path: .
-        
-  servlet:
-    multipart:
-        max-file-size: 2MB
-        max-request-size: 2MB
-
-        
-reportUrl: http://127.0.0.1:8200/runReport
-sealSavePath: /home/joy/Documents/dxr-seal-image/
 
 server:
 #  address: 192.168.68.109
@@ -219,11 +104,9 @@ server:
 
 spring:
   profiles:
-    active: internal-release-psql
+    active: develop-psql
         
 
 #production-psql
-#production-psql-clean-db
-#release-test-psql
 #develop-psql
 #internal-release-psql

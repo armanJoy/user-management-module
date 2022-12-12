@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.arcgen.usermgt.config.AppConstant;
-import com.arcgen.usermgt.repositories.web.subscription.CompanyCategoryRepo;
+import com.arcgen.usermgt.repositories.subscription.CompanyCategoryRepo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

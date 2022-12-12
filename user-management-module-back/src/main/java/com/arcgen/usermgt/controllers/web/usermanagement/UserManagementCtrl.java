@@ -1,13 +1,13 @@
 package com.arcgen.usermgt.controllers.web.usermanagement;
 
 import com.arcgen.usermgt.config.AppConstant;
-import com.arcgen.usermgt.models.view.web.usermanagement.ChangeUserIdentification;
-import com.arcgen.usermgt.models.view.web.usermanagement.CompanyAdminAccessVM;
-import com.arcgen.usermgt.models.view.web.usermanagement.DefaultCompany;
-import com.arcgen.usermgt.models.view.web.usermanagement.DxrAdminAccessVM;
-import com.arcgen.usermgt.models.view.web.usermanagement.UserIdentificationView;
-import com.arcgen.usermgt.models.view.web.usermanagement.UserInfoView;
-import com.arcgen.usermgt.services.domainservices.web.usermanagement.UserManagementDomainService;
+import com.arcgen.usermgt.models.view.usermanagement.ChangeUserIdentification;
+import com.arcgen.usermgt.models.view.usermanagement.CompanyAdminAccessVM;
+import com.arcgen.usermgt.models.view.usermanagement.DefaultCompany;
+import com.arcgen.usermgt.models.view.usermanagement.DxrAdminAccessVM;
+import com.arcgen.usermgt.models.view.usermanagement.UserIdentificationView;
+import com.arcgen.usermgt.models.view.usermanagement.UserInfoView;
+import com.arcgen.usermgt.services.domainservices.usermanagement.UserManagementDomainService;
 import com.arcgen.usermgt.util.UtilService;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
