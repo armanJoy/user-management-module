@@ -640,25 +640,8 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
 
     @Override
     public void createDxrUser(UserInfoView userInfoView) {
-
         String userAuthId = createDxrIdentification(userInfoView);
-        String companyId = userInfoView.getUserCompanyId();
         createCompanyUser(userInfoView, userAuthId);
-
-        List<PrevilagedUser> previlagedUser = previlagedUserRepo.findByCompanyIdAndUserId(userInfoView.getUserCompanyId(), userAuthId);
-
-        if (previlagedUser == null || previlagedUser.size() <= 0) {
-            PrevilagedUser newPrevilagedUser = new PrevilagedUser();
-            newPrevilagedUser.setCompanyId(companyId);
-            newPrevilagedUser.setUserId(userAuthId);
-            newPrevilagedUser.setAdminType(AppConstant.DXR_ADMIN_ROLE);
-            String newId = utilService.generateUniqueId();
-            newPrevilagedUser.setPrevilagedUserId(newId);
-
-            previlagedUserRepo.save(newPrevilagedUser);
-        }
-
-//        createDxrAdminMenuAccessInfo(userAuthId, companyId);
     }
 
     public void createCompanyUser(UserInfoView userInfoView, String userAuthId) {
@@ -672,26 +655,16 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
         }
     }
 
-    public void addAsPrevilagedUser(UserInfoView userInfoView) {
-
-    }
-
     @Override
     public String createDxrIdentification(UserInfoView userInfoView) {
         String userIdentificationId = "";
         try {
             UserIdentification saveduserIdentificationByMail = new UserIdentification();
             saveduserIdentificationByMail = userIdentificationRepo.findByUserId(userInfoView.getUserEmail());
-            UserIdentification saveduserIdentificationByContact = new UserIdentification();
-            saveduserIdentificationByContact = userIdentificationRepo.findByUserId(userInfoView.getUserContact());
 
             if (saveduserIdentificationByMail != null) {
 
                 userIdentificationId = saveduserIdentificationByMail.getUserIdentificationId();
-
-            } else if (saveduserIdentificationByContact != null) {
-
-                userIdentificationId = saveduserIdentificationByContact.getUserIdentificationId();
 
             } else {
 

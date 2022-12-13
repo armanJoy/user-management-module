@@ -68,7 +68,7 @@
                 <exec.vmArgs>-Djasypt.encryptor.password=dxrapplicationbymangrove</exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs></exec.appArgs>
-                <exec.mainClass>com.msbd.dxr.DxrBackApplication</exec.mainClass>
+                <exec.mainClass>com.arcgen.usermgt.DxrBackApplication</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>/home/joy/Documents/dx-r-develpment-back/dxr-back</exec.workingdir>
             </properties>
@@ -85,7 +85,7 @@
                 <exec.vmArgs>-Djasypt.encryptor.password=dxrapplicationbymangrove -agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs></exec.appArgs>
-                <exec.mainClass>com.msbd.dxr.DxrBackApplication</exec.mainClass>
+                <exec.mainClass>com.arcgen.usermgt.DxrBackApplication</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
                 <exec.workingdir>/home/joy/Documents/dx-r-develpment-back/dxr-back</exec.workingdir>

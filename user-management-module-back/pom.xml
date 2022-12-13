@@ -163,7 +163,7 @@
                 <configuration> 
                     <archive> 
                         <manifest> 
-                            <mainClass>com.msbd.dxr.DxrBackApplication</mainClass> 
+                            <mainClass>com.arcgen.usermgt.DxrBackApplication</mainClass> 
                         </manifest> 
                     </archive> 
                     <descriptorRefs> 

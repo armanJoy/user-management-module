@@ -15,13 +15,14 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-//@CrossOrigin(origins = "https://dxrreleases.com, https://dxr-mob-app.web.app, http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/web/user-management")
 public class UserManagementCtrl {
@@ -31,17 +32,6 @@ public class UserManagementCtrl {
 
     @Autowired
     UserManagementDomainService userManagementDomainService;
-
-    @RequestMapping(method = RequestMethod.POST, value = "/get-access-info")
-    public String getAccessInfo(@RequestHeader("langIndex") String language, @RequestBody UserIdentificationView userIdentificationView) {
-        String menuAccessInfo = "";
-
-        if (userIdentificationView != null) {
-            menuAccessInfo = userManagementDomainService.authenticateUser(userIdentificationView, language);
-        }
-
-        return menuAccessInfo;
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public String login(@RequestHeader("langIndex") String language, @RequestBody UserIdentificationView userIdentificationView) {
@@ -63,11 +53,6 @@ public class UserManagementCtrl {
     @RequestMapping(method = RequestMethod.POST, value = "/get-user-info-by-mail")
     public UserInfoView getUserInfoByEmail(@RequestHeader("langIndex") String language, @RequestBody String userEmail) {
         return userManagementDomainService.getUserInfoByEmail(userEmail);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/get-user-info-by-contact")
-    public UserInfoView getUserInfoByContact(@RequestHeader("langIndex") String language, @RequestBody String userContact) {
-        return userManagementDomainService.getUserInfoByContact(userContact);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/resendUserAccess")
@@ -108,20 +93,6 @@ public class UserManagementCtrl {
         return changeResponse;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/set-dxr-access")
-    public DxrAdminAccessVM saveDxrAdminAccess(@RequestHeader("langIndex") String language, @RequestBody String dxrAdminAccessString) {
-        DxrAdminAccessVM dxrAdminAccessVM = new DxrAdminAccessVM();
-        dxrAdminAccessVM.setDxrAdminAccess(dxrAdminAccessString);
-        return userManagementDomainService.saveDxrAdminAccess(dxrAdminAccessVM);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/set-company-access")
-    public CompanyAdminAccessVM saveCompanyAdminAccess(@RequestHeader("langIndex") String language, @RequestBody String companyAdminAccessString) {
-        CompanyAdminAccessVM companyAdminAccessVM = new CompanyAdminAccessVM();
-        companyAdminAccessVM.setCompanyAdminAccess(companyAdminAccessString);
-        return userManagementDomainService.saveCompanyAdminAccess(companyAdminAccessVM);
-    }
-
     @RequestMapping(method = RequestMethod.POST, value = "/encryptData")
     public void returnEncryptedData(@RequestBody String data) {
         String publicOrgId = utilService.getOrgIdPublicPart();
@@ -141,12 +112,6 @@ public class UserManagementCtrl {
         String privateKeyString = utilService.getOrgIdPrivatePart();
         PrivateKey privateKey = utilService.getPrivateKeyFromString(privateKeyString);
 //        System.out.println(utilService.decryptWithAsymetricKey(encryptedHash, privateKey));
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/save-default-company")
-    @Transactional
-    public DefaultCompany saveDefaultCompany(@RequestHeader("langIndex") String language, @RequestBody DefaultCompany defaultCompany) {
-        return userManagementDomainService.saveDefaultCompany(defaultCompany);
     }
 
 }

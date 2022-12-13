@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "https://dxrreleases.com, https://dxr-mob-app.web.app, http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/web/role-def")
 public class RoleDefCtrl {
