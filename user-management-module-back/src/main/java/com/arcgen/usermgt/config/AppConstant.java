@@ -7,6 +7,10 @@ import java.util.Map;
 
 public class AppConstant {
 
+    public static final String OTP_MAIL_SUBJECT = "OTP";
+    public static final String OTP_MAIL_CONTENT = "Your temporary OTP is - ";
+    public static final Integer OTP_LENGHT = 6;
+
     public static final String NOT_APPLICABLE_STRING = "N/A";
 
     public static final String BANK_PAYMENT_MODE = "B";
@@ -512,8 +516,8 @@ public class AppConstant {
     public static final String AUTH_TOKEN = "077d0eb6610cf85b4dafea1533f0be67";
 
     // mail sending
-    public static final String USER_NAME = "webitmangrove@gmail.com";
-    public static final String PASSWORD = "F9Z0KgQUoJxm9CFRWUfBw4b1QvR4QK4RcEiP7MdP0Sn8bbLIiVw2ohMieqXB3eRhpEZdI4Ke0KtcZ/63HvUHq5T8heLeY/ejZJM2aCJhVftBQIJ4yPfYMd5RzEHEdwjtAuYeGXk7zPjYsaYbcbLL0b6ic9vqJKKP5MR21PxAfj6zsAQuhT/dpck+Eh7/Ai5A2gVMOcDtn84IdwU3UpRk7AuN9zgVlE+ZY6zwGK05/ozi9Ib509CxqlSfKp15QbkCh4RGr8937uPaVuxHYLhbxnA1/EuEGW+qbbrJRxu8xKe2Tbua6duHervKhj9X7MJZZJ4Oj550uuDkfjRMF/8W1Q==";
+    public static final String USER_NAME = "email2arjoy@gmail.com";
+    public static final String PASSWORD = "CnNNnYbnYPin/ls/YsmqI34KEirdL3iXUNnubwPmj4u4fry7YKMvmlr3Up7IsCv/uuWTE7W63qRYsz+yjiOkrn+cnqRNUoKg6PcXLek9mC/LxsuNirvaEBNWdeYVKMFp/H71kPFI+4gMeOoM+fFz5Zi7LXFmz8mglmvcyP+rjpoE5BVnWY1NjhZkLgsX0GXCd9XEz+7rYAJKLr6GM+gvyw/gcv2I8JpAY9gWhrpRYnDCIIND1W5OOemea0CTo0PIqYCgaHFwyD8RQPs+YL+iqxY1FUE1qzoR7tlilXuMh0ojyBWseYO9ZorKdDOZekuLLR4BBgTp/d+o7WNjI32baA==";
     public static final String MAIL_SUBJECT_ACCEPTED = "Application accepted";
     public static final String INQUIRY_MAIL_SUBJECT = "Inquiry response";
     public static final String SUBSCRIPTION_ACCEPT_MAIL_SUBJECT = "Application status";

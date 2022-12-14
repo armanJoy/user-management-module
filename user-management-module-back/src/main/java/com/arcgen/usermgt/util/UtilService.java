@@ -18,8 +18,6 @@ public interface UtilService {
 
     void saveCompanyOrUserSealToFile(String base64ImageString, String firstPart, String secondPart);
 
-    String convertToFullTextString(Object object);
-
     String listToStringConversion(List<String> listItem);
 
     String generateUniqueId();
@@ -85,10 +83,12 @@ public interface UtilService {
 
     String generateRandomLowerCaseAlphabet(int length);
 
+    String generateRandomNumnericString(int length);
+
     String decryptUserAuth(String encryptedUserAuth);
 
     String generateHashFromEncryptedString(String encryptedUserAuth) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    HttpHeaders getDxrHttpHeaders();
+    HttpHeaders getHttpHeaders();
 
 }

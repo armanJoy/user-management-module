@@ -50,9 +50,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilServiceImpl implements UtilService {
 
-    @Autowired
-    DateTimeService dateTimeService;
-
     private Environment environment;
 
     UtilServiceImpl(Environment environment) {
@@ -623,6 +620,13 @@ public class UtilServiceImpl implements UtilService {
     }
 
     @Override
+    public String generateRandomNumnericString(int length) {
+        RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange(48, 57)
+                .build();
+        return pwdGenerator.generate(length);
+    }
+
+    @Override
     public String decryptUserAuth(String encryptedUserAuth) {
         String decryptedUserAuth = "";
         String privateKeyString = getOrgIdPrivatePart();
@@ -661,25 +665,11 @@ public class UtilServiceImpl implements UtilService {
     }
 
     @Override
-    public HttpHeaders getDxrHttpHeaders() {
+    public HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add(AppConstant.ALLOW_ORIGIN_HEADER, "*");
 
         return headers;
-    }
-
-    @Override
-    public String convertToFullTextString(Object object) {
-        String fullTextString = "";
-        if (object != null) {
-            Gson jsonParser = new Gson();
-            String objectJson = jsonParser.toJson(object);
-            Map<String, String> map = new JsonFlattener(objectJson).flatten();
-            List<String> list = new ArrayList<String>(map.values());
-            fullTextString = String.join(" ", list).toLowerCase();
-        }
-        return fullTextString;
-
     }
 
     @Override

@@ -8,6 +8,16 @@ public class MailVM {
 
     private String mailSubject;
 
+    public MailVM() {
+
+    }
+
+    public MailVM(String mailAddress, String mailSubject, String mailContent) {
+        this.mailAddress = mailAddress;
+        this.mailSubject = mailSubject;
+        this.mailContent = mailContent;
+    }
+
     public String getMailAddress() {
         return mailAddress;
     }

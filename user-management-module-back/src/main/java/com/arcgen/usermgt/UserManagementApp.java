@@ -8,14 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableEncryptableProperties
 public class UserManagementApp {
 
-//    @Autowired
-//    UtilService utilService;
     public static void main(String[] args) {
         SpringApplication.run(UserManagementApp.class, args);
         System.out.println("User Management Project BackEnd");
     }
 
-//    public void init() {
-//        utilService.generateOrgAppAccessControlItems("organization/dxr");
-//    }
 }

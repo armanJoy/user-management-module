@@ -1,7 +1,7 @@
 spring:
   profiles: production-psql
   datasource:
-    url: jdbc:postgresql://10.0.3.18:5432/usermgtdb?currentSchema=arcgen
+    url: jdbc:postgresql://10.0.3.18:5432/usermgtdb?currentSchema=usermgt
     username: postgres
 #    password: joy1234
     password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
@@ -39,7 +39,7 @@ server:
 spring:
   profiles: develop-psql
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/usermgtdb?currentSchema=arcgen
+    url: jdbc:postgresql://127.0.0.1:5432/usermgtdb?currentSchema=usermgt
     username: postgres
     password: dxr1234
 #    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)

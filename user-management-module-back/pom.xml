@@ -163,7 +163,7 @@
                 <configuration> 
                     <archive> 
                         <manifest> 
-                            <mainClass>com.arcgen.usermgt.DxrBackApplication</mainClass> 
+                            <mainClass>com.arcgen.usermgt.UserManagementApp</mainClass> 
                         </manifest> 
                     </archive> 
                     <descriptorRefs> 

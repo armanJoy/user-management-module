@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS arcgen.user_identification(
+CREATE TABLE IF NOT EXISTS usermgt.user_identification(
     user_identification_id VARCHAR(255) NOT NULL,
     user_id VARCHAR(255),
     user_auth VARCHAR(512),
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS arcgen.user_identification(
 );
 
 
-CREATE TABLE IF NOT EXISTS arcgen.user_category(
+CREATE TABLE IF NOT EXISTS usermgt.user_category(
     user_category_id VARCHAR(255) NOT NULL,
     user_category_title VARCHAR(255),
     user_category_code VARCHAR(255),
@@ -16,46 +16,31 @@ CREATE TABLE IF NOT EXISTS arcgen.user_category(
 );
 
 
-INSERT INTO arcgen.user_category(
+INSERT INTO usermgt.user_category(
 	user_category_id, user_category_title, user_category_code, user_category_description)
 	VALUES ('usercategory0001', 'Admin User', 'U-0001', 'Admin User');
 
-INSERT INTO arcgen.user_category(
+INSERT INTO usermgt.user_category(
 	user_category_id, user_category_title, user_category_code, user_category_description)
 	VALUES ('usercategory0002', 'General User', 'U-0002', 'General User');
 
 
-CREATE TABLE IF NOT EXISTS arcgen.user_info(
+CREATE TABLE IF NOT EXISTS usermgt.user_info(
     user_info_id VARCHAR(255) NOT NULL,
     user_name VARCHAR(255),
     user_email VARCHAR(255),
     user_contact VARCHAR(255),
     user_address VARCHAR(255),
     department_title VARCHAR(255),
-    -- user_company_id VARCHAR(255),
     user_auth_id VARCHAR(255),
     user_category_id VARCHAR(255),
-    -- job_title VARCHAR(255) DEFAULT '',
-    -- driving_license_no VARCHAR(255) DEFAULT '',
-    -- driving_license_bytes bytea,
-    -- office_name VARCHAR(255) DEFAULT '',
-    -- office_address VARCHAR(255) DEFAULT '',
-    -- office_contact_no VARCHAR(255) DEFAULT '',
     user_id VARCHAR(255),
-    -- remarks VARCHAR(255) DEFAULT '',
-    -- user_seal_bytes bytea,
-    -- search_content character varying(10485760) DEFAULT '',
-    -- active character varying(10) DEFAULT '1',
     CONSTRAINT user_info_pkey PRIMARY KEY (user_info_id),
-    CONSTRAINT user_info_user_auth_id_fkey FOREIGN KEY (user_auth_id)
-        REFERENCES arcgen.user_identification (user_identification_id),
-    CONSTRAINT user_info_user_category_id_fkey FOREIGN KEY (user_category_id)
-        REFERENCES arcgen.user_category (user_category_id)
-    -- CONSTRAINT user_info_user_company_id_fkey FOREIGN KEY (user_company_id)
-    --     REFERENCES arcgen.company_info (company_info_id)
+    CONSTRAINT user_info_user_auth_id_fkey FOREIGN KEY (user_auth_id) REFERENCES usermgt.user_identification (user_identification_id),
+    CONSTRAINT user_info_user_category_id_fkey FOREIGN KEY (user_category_id) REFERENCES usermgt.user_category (user_category_id)
 );
 
--- CREATE TABLE IF NOT EXISTS arcgen.company_info (
+-- CREATE TABLE IF NOT EXISTS usermgt.company_info (
 --     company_info_id VARCHAR(255) NOT NULL,
 --     company_name VARCHAR(255),
 --     company_address VARCHAR(255),
@@ -81,7 +66,7 @@ CREATE TABLE IF NOT EXISTS arcgen.user_info(
 --     approval_status VARCHAR(255) DEFAULT '',
 --     CONSTRAINT company_info_pkey PRIMARY KEY (company_info_id),
 --     CONSTRAINT company_info_notification_id_fkey FOREIGN KEY (notification_id)
---         REFERENCES arcgen.notification (notification_id),
+--         REFERENCES usermgt.notification (notification_id),
 --     CONSTRAINT company_info_subscription_id_fkey FOREIGN KEY (subscription_id)
---         REFERENCES arcgen.subscription_info (subscription_info_id)  
+--         REFERENCES usermgt.subscription_info (subscription_info_id)  
 -- );

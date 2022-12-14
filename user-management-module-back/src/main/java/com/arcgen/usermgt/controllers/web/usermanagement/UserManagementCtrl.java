@@ -3,6 +3,7 @@ package com.arcgen.usermgt.controllers.web.usermanagement;
 import com.arcgen.usermgt.config.AppConstant;
 import com.arcgen.usermgt.models.view.usermanagement.UserIdentificationView;
 import com.arcgen.usermgt.models.view.usermanagement.UserInfoView;
+import com.arcgen.usermgt.models.view.usermanagement.UserOtp;
 import com.arcgen.usermgt.services.domainservices.usermanagement.UserManagementDomainService;
 import com.arcgen.usermgt.util.UtilService;
 import java.security.NoSuchAlgorithmException;
@@ -28,20 +29,41 @@ public class UserManagementCtrl {
     @Autowired
     UserManagementDomainService userManagementDomainService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public String login(@RequestBody UserIdentificationView userIdentificationView) {
+    @RequestMapping(method = RequestMethod.POST, value = "/cookie-login")
+    public String loginFromCookie(@RequestBody UserIdentificationView userIdentificationView) {
         String menuAccessInfoView = "";
 
         if (userIdentificationView != null) {
-            menuAccessInfoView = userManagementDomainService.authenticateUser(userIdentificationView);
+            menuAccessInfoView = userManagementDomainService.authenticateUser(userIdentificationView, false);
         }
 
         return menuAccessInfoView;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/init-login")
+    public String initialLogin(@RequestBody UserIdentificationView userIdentificationView) {
+        String menuAccessInfoView = "";
+
+        if (userIdentificationView != null) {
+            menuAccessInfoView = userManagementDomainService.authenticateUser(userIdentificationView, true);
+        }
+
+        return menuAccessInfoView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/confirm-otp")
+    public String confirmOtp(@RequestBody UserOtp userOtp) {
+        return userManagementDomainService.confirmOtp(userOtp);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/resend-otp")
+    public String resendOtp(@RequestBody String userMail) {
+        return userManagementDomainService.sendOtp(userMail);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/create-user")
     public UserInfoView createUser(@RequestBody UserInfoView userInfoView) {
-        return userManagementDomainService.createDxrUser(userInfoView);
+        return userManagementDomainService.createUser(userInfoView);
 
     }
 

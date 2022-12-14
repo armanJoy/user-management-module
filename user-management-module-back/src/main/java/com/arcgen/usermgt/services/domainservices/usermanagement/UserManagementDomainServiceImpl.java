@@ -3,15 +3,21 @@ package com.arcgen.usermgt.services.domainservices.usermanagement;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.arcgen.usermgt.config.AppConstant;
+import com.arcgen.usermgt.controllers.web.utility.UtilityCtrl;
 import com.arcgen.usermgt.models.domain.usermanagement.UserIdentification;
 import com.arcgen.usermgt.models.domain.usermanagement.UserInfo;
 import com.arcgen.usermgt.models.view.usermanagement.UserIdentificationView;
 import com.arcgen.usermgt.models.view.usermanagement.UserInfoView;
+import com.arcgen.usermgt.models.view.usermanagement.UserOtp;
+import com.arcgen.usermgt.models.view.utility.MailVM;
 import com.arcgen.usermgt.repositories.usermanagement.UserIdentificationRepo;
 import com.arcgen.usermgt.repositories.usermanagement.UserInfoRepo;
 import com.arcgen.usermgt.util.UtilService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +33,14 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
     @Autowired
     UtilService utilService;
 
+    @Autowired
+    UtilityCtrl utilCtrl;
+
+    private HashMap<String, String> otpStore = new HashMap<>();
+
     @Override
-    public String authenticateUser(UserIdentificationView userIdentificationView) {
-        String accessFlag = "";
+    public String authenticateUser(UserIdentificationView userIdentificationView, boolean initialLogin) {
+        String authorizedUser = "";
 
         String decryptedPass = utilService.decryptUserAuth(userIdentificationView.getUserAuth());
 
@@ -43,7 +54,7 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
                 if (userIdentification != null && isAuthorized) {
                     userIdentificationView.setUserAuth("");
                     Gson gson = new Gson();
-                    accessFlag = gson.toJson(userIdentificationView);
+                    authorizedUser = gson.toJson(userIdentificationView);
                 }
             } catch (Exception ex) {
 
@@ -53,7 +64,56 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
 
         }
 
-        return accessFlag;
+        if (authorizedUser != null && !authorizedUser.isEmpty() && initialLogin) {
+            sendOtp(userIdentificationView.getUserId());
+        }
+
+        return authorizedUser;
+    }
+
+    @Override
+    public String sendOtp(String userEmail) {
+        String sendSuccess = AppConstant.TRUE_VALUE;
+        try {
+            String otp = utilService.generateRandomNumnericString(AppConstant.OTP_LENGHT);
+            MailVM mailVM = new MailVM(userEmail, "", AppConstant.OTP_MAIL_CONTENT.concat(otp));
+
+            otpStore.put(userEmail, otp);
+
+            utilCtrl.sendMailToMailAddress(mailVM);
+
+            clearOtpAfterExpireTime(userEmail);
+        } catch (Exception e) {
+            sendSuccess = AppConstant.FALSE_VALUE;
+
+        }
+
+        return sendSuccess;
+    }
+
+    ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+
+    void clearOtpAfterExpireTime(String userMail) {
+        exec.schedule(new Runnable() {
+            public void run() {
+                otpStore.remove(userMail);
+            }
+
+        }, 60, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public String confirmOtp(UserOtp userOtp) {
+        String confirmed = "";
+
+        if (otpStore.containsKey(userOtp.getUserMail()) && otpStore.get(userOtp.getUserMail()).equals(userOtp.getOtp())) {
+            confirmed = AppConstant.TRUE_VALUE;
+            otpStore.remove(userOtp.getUserMail());
+        } else {
+            System.out.println("Invalid or expired OTP  - Email: " + userOtp.getUserMail() + ",  OTP: " + userOtp.getOtp());
+        }
+
+        return confirmed;
     }
 
     @Override
@@ -74,8 +134,8 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
     }
 
     @Override
-    public UserInfoView createDxrUser(UserInfoView userInfoView) {
-        String userAuthId = createDxrIdentification(userInfoView);
+    public UserInfoView createUser(UserInfoView userInfoView) {
+        String userAuthId = createUserIdentification(userInfoView);
         userInfoView = createCompanyUser(userInfoView, userAuthId);
 
         return userInfoView;
@@ -97,7 +157,7 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
     }
 
     @Override
-    public String createDxrIdentification(UserInfoView userInfoView) {
+    public String createUserIdentification(UserInfoView userInfoView) {
         String userIdentificationId = "";
         try {
             UserIdentification saveduserIdentificationByMail = new UserIdentification();
@@ -112,15 +172,12 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
                 UserIdentification newUserIdentification = new UserIdentification();
 
                 newUserIdentification.setUserId(userInfoView.getUserEmail());
-//                String userAuthPass = utilService.generatePassword();
-//                System.out.println("DXR Admin Email: " + userInfoView.getUserEmail() + "DXR Admin Pass" + userAuthPass);
 
                 String userAuthPass = utilService.decryptUserAuth(userInfoView.getPass());
                 String userAuthHash = utilService.generateStorngPasswordHash(userAuthPass);
                 newUserIdentification.setUserAuth(userAuthHash);
                 String newIdString = utilService.generateUniqueId();
                 newUserIdentification.setUserIdentificationId(newIdString);
-//                newUserIdentification.setOneTimeAccessFlag(AppConstant.ONE_TIME_ACCESS_FLAG_FALSE);
 
                 newUserIdentification = userIdentificationRepo.save(newUserIdentification);
 
