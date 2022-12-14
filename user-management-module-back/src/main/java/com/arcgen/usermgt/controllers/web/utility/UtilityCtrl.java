@@ -32,9 +32,9 @@ public class UtilityCtrl {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/get-date-view")
-    JSONObject getCurrentDateView(@RequestHeader("langIndex") String language, @RequestBody String date) {
-        String formatedBackendDate = dateTimeService.formatDateTimeAsLanguageMode(language, date, AppConstant.FRONT_END_TO_BACK_END);
-        String formatedFrontendDate = dateTimeService.formatDateTimeAsLanguageMode(language, formatedBackendDate, AppConstant.BACK_END_TO_FRONT_END);
+    JSONObject getCurrentDateView(@RequestBody String date) {
+        String formatedBackendDate = dateTimeService.formatDateTimeAsLanguageMode(AppConstant.LANG_INDEX_ENGLISH, date, AppConstant.FRONT_END_TO_BACK_END);
+        String formatedFrontendDate = dateTimeService.formatDateTimeAsLanguageMode(AppConstant.LANG_INDEX_ENGLISH, formatedBackendDate, AppConstant.BACK_END_TO_FRONT_END);
         JSONObject dateObject = new JSONObject();
         dateObject.put("date", formatedFrontendDate);
         return dateObject;

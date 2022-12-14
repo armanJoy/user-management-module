@@ -28,7 +28,7 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
     UtilService utilService;
 
     @Override
-    public String authenticateUser(UserIdentificationView userIdentificationView, String langIndex) {
+    public String authenticateUser(UserIdentificationView userIdentificationView) {
         String accessFlag = "";
 
         String decryptedPass = utilService.decryptUserAuth(userIdentificationView.getUserAuth());
@@ -74,12 +74,14 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
     }
 
     @Override
-    public void createDxrUser(UserInfoView userInfoView) {
+    public UserInfoView createDxrUser(UserInfoView userInfoView) {
         String userAuthId = createDxrIdentification(userInfoView);
-        createCompanyUser(userInfoView, userAuthId);
+        userInfoView = createCompanyUser(userInfoView, userAuthId);
+
+        return userInfoView;
     }
 
-    public void createCompanyUser(UserInfoView userInfoView, String userAuthId) {
+    public UserInfoView createCompanyUser(UserInfoView userInfoView, String userAuthId) {
         UserInfo userInfo = userInfoViewToDomain(userInfoView);
         userInfo.setUserAuthId(userAuthId);
 
@@ -88,6 +90,10 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
         if (savedUserInfo == null) {
             userInfoRepo.save(userInfo);
         }
+
+        userInfoView.setPass("");
+
+        return userInfoView;
     }
 
     @Override
@@ -106,8 +112,10 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
                 UserIdentification newUserIdentification = new UserIdentification();
 
                 newUserIdentification.setUserId(userInfoView.getUserEmail());
-                String userAuthPass = utilService.generatePassword();
+//                String userAuthPass = utilService.generatePassword();
 //                System.out.println("DXR Admin Email: " + userInfoView.getUserEmail() + "DXR Admin Pass" + userAuthPass);
+
+                String userAuthPass = utilService.decryptUserAuth(userInfoView.getPass());
                 String userAuthHash = utilService.generateStorngPasswordHash(userAuthPass);
                 newUserIdentification.setUserAuth(userAuthHash);
                 String newIdString = utilService.generateUniqueId();
@@ -147,7 +155,6 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
 
     @Override
     public UserInfo userInfoViewToDomain(UserInfoView data) {
-        UserInfo userInfo = new UserInfo();
         Gson jsonParser = new Gson();
         String dataJson = jsonParser.toJson(data);
         UserInfo convertedData = jsonParser.fromJson(dataJson, UserInfo.class);

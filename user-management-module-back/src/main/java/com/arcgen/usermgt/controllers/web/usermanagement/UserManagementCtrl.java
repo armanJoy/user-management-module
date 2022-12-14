@@ -29,24 +29,24 @@ public class UserManagementCtrl {
     UserManagementDomainService userManagementDomainService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public String login(@RequestHeader("langIndex") String language, @RequestBody UserIdentificationView userIdentificationView) {
+    public String login(@RequestBody UserIdentificationView userIdentificationView) {
         String menuAccessInfoView = "";
 
         if (userIdentificationView != null) {
-            menuAccessInfoView = userManagementDomainService.authenticateUser(userIdentificationView, language);
+            menuAccessInfoView = userManagementDomainService.authenticateUser(userIdentificationView);
         }
 
         return menuAccessInfoView;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/create-dxr-admin")
-    public void createSystemAdmin(@RequestHeader("langIndex") String language, @RequestBody UserInfoView userInfoView) {
-        userManagementDomainService.createDxrUser(userInfoView);
+    @RequestMapping(method = RequestMethod.POST, value = "/create-user")
+    public UserInfoView createUser(@RequestBody UserInfoView userInfoView) {
+        return userManagementDomainService.createDxrUser(userInfoView);
 
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/get-user-info-by-mail")
-    public UserInfoView getUserInfoByEmail(@RequestHeader("langIndex") String language, @RequestBody String userEmail) {
+    public UserInfoView getUserInfoByEmail(@RequestBody String userEmail) {
         return userManagementDomainService.getUserInfoByEmail(userEmail);
     }
 

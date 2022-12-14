@@ -18,6 +18,8 @@ public class UserInfoView {
 
     private String userCategoryId;
 
+    private String pass;
+
     public UserInfoView() {
 
     }
@@ -76,6 +78,14 @@ public class UserInfoView {
 
     public void setUserCategoryId(String userCategoryId) {
         this.userCategoryId = userCategoryId;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
 }

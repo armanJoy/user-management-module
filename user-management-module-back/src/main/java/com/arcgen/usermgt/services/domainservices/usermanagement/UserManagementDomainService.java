@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserManagementDomainService {
 
-    String authenticateUser(UserIdentificationView userIdentificationView, String langIndex);
+    String authenticateUser(UserIdentificationView userIdentificationView);
 
-    void createDxrUser(UserInfoView userInfoView);
+    UserInfoView createDxrUser(UserInfoView userInfoView);
 
     String createDxrIdentification(UserInfoView userInfoView);
 
