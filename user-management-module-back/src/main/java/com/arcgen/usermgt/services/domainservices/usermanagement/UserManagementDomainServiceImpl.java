@@ -76,7 +76,7 @@ public class UserManagementDomainServiceImpl implements UserManagementDomainServ
         String sendSuccess = AppConstant.TRUE_VALUE;
         try {
             String otp = utilService.generateRandomNumnericString(AppConstant.OTP_LENGHT);
-            MailVM mailVM = new MailVM(userEmail, "", AppConstant.OTP_MAIL_CONTENT.concat(otp));
+            MailVM mailVM = new MailVM(userEmail, AppConstant.OTP_MAIL_SUBJECT, AppConstant.OTP_MAIL_CONTENT.concat(otp));
 
             otpStore.put(userEmail, otp);
 

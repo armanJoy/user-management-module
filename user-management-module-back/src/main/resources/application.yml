@@ -27,13 +27,13 @@ spring:
 
 server:
   address: 172.31.95.49
-  port: 443
-  http.port: 80
-  ssl:
-    key-store: ../sslkeys/29-01-2022/springboot_letsencrypt.p12 
-    key-store-password: dxr
-    keyStoreType: PKCS12
-    keyAlias: bootalias
+  port: 4040
+#  http.port: 4040
+#  ssl:
+#    key-store: ../sslkeys/29-01-2022/springboot_letsencrypt.p12 
+#    key-store-password: dxr
+#    keyStoreType: PKCS12
+#    keyAlias: bootalias
 ---
 
 spring:
@@ -72,7 +72,7 @@ server:
 
 spring:
   profiles:
-    active: develop-psql
+    active: production-psql
         
 
 #production-psql

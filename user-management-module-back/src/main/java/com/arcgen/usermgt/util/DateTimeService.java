@@ -8,8 +8,6 @@ public interface DateTimeService {
 
     String formatDateTime(String dateTime, String direction);
 
-    String formatDateTimeAsLanguageMode(String langIndex, String dateString, String direction);
-
     String formatDate(String date, String direction);
 
     LocalDate stringToDateType(String date, String dataSource);
@@ -25,7 +23,5 @@ public interface DateTimeService {
     String getPlainTimeFormat(String timeString);
 
     String formatedTime(String timeString);
-
-    String getTimeValidatation(String timeString, String language);
 
 }

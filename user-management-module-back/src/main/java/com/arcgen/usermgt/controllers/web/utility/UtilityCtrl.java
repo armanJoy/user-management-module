@@ -13,7 +13,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -89,20 +88,7 @@ public class UtilityCtrl {
     @RequestMapping(method = RequestMethod.GET, value = "/current-date")
     String getCurrentDate(@RequestHeader("langIndex") String language) {
         String date = dateTimeService.getCurrentTime();
-//        String formatedDate = dateTimeService.formatDateTimeAsLanguageMode(language, date, AppConstant.FRONT_END_TO_BACK_END);
-//        JSONObject jSONObject = new JSONObject();
-//        jSONObject.put("date", formatedDate);
         return date;
-
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/get-date-view")
-    JSONObject getCurrentDateView(@RequestBody String date) {
-        String formatedBackendDate = dateTimeService.formatDateTimeAsLanguageMode(AppConstant.LANG_INDEX_ENGLISH, date, AppConstant.FRONT_END_TO_BACK_END);
-        String formatedFrontendDate = dateTimeService.formatDateTimeAsLanguageMode(AppConstant.LANG_INDEX_ENGLISH, formatedBackendDate, AppConstant.BACK_END_TO_FRONT_END);
-        JSONObject dateObject = new JSONObject();
-        dateObject.put("date", formatedFrontendDate);
-        return dateObject;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/check-serve")

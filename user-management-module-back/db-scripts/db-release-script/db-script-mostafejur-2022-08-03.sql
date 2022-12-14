@@ -1,1 +1,0 @@
-ALTER TABLE DXRADMIN.disposal_info ADD transport_distance DOUBLE PRECISION DEFAULT 0.00;
