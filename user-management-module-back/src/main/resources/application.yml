@@ -1,7 +1,7 @@
 spring:
   profiles: production-psql
   datasource:
-    url: jdbc:postgresql://10.0.3.18:5432/appdb?currentSchema=appadmin
+    url: jdbc:postgresql://10.0.3.18:5432/usermgtdb?currentSchema=arcgen
     username: postgres
 #    password: joy1234
     password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
@@ -37,44 +37,12 @@ server:
 ---
 
 spring:
-  profiles: internal-release-psql
-  datasource:
-    url: jdbc:postgresql://192.168.68.109:5432/dxrdb?currentSchema=dxradmin
-    username: postgres
-#    password: dxr1234
-    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: update
-#        generate_statistics: true
-        format_sql: true
-        jdbc: 
-          lob:
-            non_contextual_creation: true
-  logging:
-    level:
-    org:
-      hibernate:
-        type: trace
-        stat: debug
-    file:
-        path: .
-
-server:
-  address: 192.168.68.109
-  port: 8000
----
-
-spring:
   profiles: develop-psql
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/dxrdb?currentSchema=dxradmin
+    url: jdbc:postgresql://127.0.0.1:5432/usermgtdb?currentSchema=arcgen
     username: postgres
- #   password: dxr1234
-    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
+    password: dxr1234
+#    password: ENC(rYzcd8JP3REMm0kJkMgFPXHYNwj04B3Rk6WZ6gco7QFrNQUSq6y41zN6ab2cDyY6)
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 #    show-sql: true
@@ -99,7 +67,7 @@ spring:
 server:
 #  address: 192.168.68.109
   address: 127.0.0.1
-  port: 8000
+  port: 9000
 ---
 
 spring:
@@ -109,4 +77,3 @@ spring:
 
 #production-psql
 #develop-psql
-#internal-release-psql

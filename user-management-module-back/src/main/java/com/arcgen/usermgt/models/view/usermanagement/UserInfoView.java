@@ -16,8 +16,6 @@ public class UserInfoView {
 
     private String departmentTitle = "";
 
-    private String userCompanyId = "";
-
     private String userCategoryId;
 
     public UserInfoView() {
@@ -70,14 +68,6 @@ public class UserInfoView {
 
     public void setDepartmentTitle(String departmentTitle) {
         this.departmentTitle = departmentTitle;
-    }
-
-    public String getUserCompanyId() {
-        return userCompanyId;
-    }
-
-    public void setUserCompanyId(String userCompanyId) {
-        this.userCompanyId = userCompanyId;
     }
 
     public String getUserCategoryId() {

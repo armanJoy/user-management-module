@@ -6,8 +6,7 @@ public class UserIdentificationView {
 
     private String userAuth;
 
-    private String oneTimeAccessFlag;
-
+//    private String oneTimeAccessFlag;
     public UserIdentificationView() {
 
     }
@@ -28,12 +27,11 @@ public class UserIdentificationView {
         this.userAuth = userAuth;
     }
 
-    public String getOneTimeAccessFlag() {
-        return oneTimeAccessFlag;
-    }
-
-    public void setOneTimeAccessFlag(String oneTimeAccessFlag) {
-        this.oneTimeAccessFlag = oneTimeAccessFlag;
-    }
-
+//    public String getOneTimeAccessFlag() {
+//        return oneTimeAccessFlag;
+//    }
+//
+//    public void setOneTimeAccessFlag(String oneTimeAccessFlag) {
+//        this.oneTimeAccessFlag = oneTimeAccessFlag;
+//    }
 }

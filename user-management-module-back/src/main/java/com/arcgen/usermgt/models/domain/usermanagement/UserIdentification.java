@@ -19,9 +19,8 @@ public class UserIdentification {
     @Column(name = "userAuth")
     private String userAuth;
 
-    @Column(name = "oneTimeAccessFlag")
-    private String oneTimeAccessFlag;
-
+//    @Column(name = "oneTimeAccessFlag")
+//    private String oneTimeAccessFlag;
     public UserIdentification() {
 
     }
@@ -49,13 +48,13 @@ public class UserIdentification {
     public void setUserAuth(String userAuth) {
         this.userAuth = userAuth;
     }
-
-    public String getOneTimeAccessFlag() {
-        return oneTimeAccessFlag;
-    }
-
-    public void setOneTimeAccessFlag(String oneTimeAccessFlag) {
-        this.oneTimeAccessFlag = oneTimeAccessFlag;
-    }
+//
+//    public String getOneTimeAccessFlag() {
+//        return oneTimeAccessFlag;
+//    }
+//
+//    public void setOneTimeAccessFlag(String oneTimeAccessFlag) {
+//        this.oneTimeAccessFlag = oneTimeAccessFlag;
+//    }
 
 }

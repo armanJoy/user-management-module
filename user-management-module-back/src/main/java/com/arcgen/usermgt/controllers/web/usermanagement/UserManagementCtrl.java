@@ -1,10 +1,6 @@
 package com.arcgen.usermgt.controllers.web.usermanagement;
 
 import com.arcgen.usermgt.config.AppConstant;
-import com.arcgen.usermgt.models.view.usermanagement.ChangeUserIdentification;
-import com.arcgen.usermgt.models.view.usermanagement.CompanyAdminAccessVM;
-import com.arcgen.usermgt.models.view.usermanagement.DefaultCompany;
-import com.arcgen.usermgt.models.view.usermanagement.DxrAdminAccessVM;
 import com.arcgen.usermgt.models.view.usermanagement.UserIdentificationView;
 import com.arcgen.usermgt.models.view.usermanagement.UserInfoView;
 import com.arcgen.usermgt.services.domainservices.usermanagement.UserManagementDomainService;
@@ -14,7 +10,6 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -53,44 +48,6 @@ public class UserManagementCtrl {
     @RequestMapping(method = RequestMethod.POST, value = "/get-user-info-by-mail")
     public UserInfoView getUserInfoByEmail(@RequestHeader("langIndex") String language, @RequestBody String userEmail) {
         return userManagementDomainService.getUserInfoByEmail(userEmail);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/resendUserAccess")
-    public String resendUserAccess(@RequestHeader("langIndex") String language, @RequestBody String userInfoId) {
-        boolean isSuccessfull = userManagementDomainService.regenerateUserAuthenticationCode(userInfoId);
-
-        if (!isSuccessfull) {
-            userInfoId = AppConstant.FALSE_VALUE;
-        } else {
-            userInfoId = AppConstant.TRUE_VALUE;
-        }
-        return userInfoId;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/change-password")
-    public String chnagePassword(@RequestHeader("langIndex") String language, @RequestBody ChangeUserIdentification changeUserIdentification) {
-        String changeResponse = "";
-        boolean isSuccessfull = userManagementDomainService.changePasswordFromForgetPassword(changeUserIdentification);
-
-        if (!isSuccessfull) {
-            changeResponse = AppConstant.FALSE_VALUE;
-        } else {
-            changeResponse = AppConstant.TRUE_VALUE;
-        }
-        return changeResponse;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/change-first-login-password")
-    public String chnageFirstLoginPassword(@RequestHeader("langIndex") String language, @RequestBody UserIdentificationView changeUserIdentification) {
-        String changeResponse = "";
-        boolean isSuccessfull = userManagementDomainService.changeFirstLoginUserPassword(changeUserIdentification);
-
-        if (!isSuccessfull) {
-            changeResponse = AppConstant.FALSE_VALUE;
-        } else {
-            changeResponse = AppConstant.TRUE_VALUE;
-        }
-        return changeResponse;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/encryptData")
