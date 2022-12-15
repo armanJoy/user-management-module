@@ -72,24 +72,4 @@ public class UserManagementCtrl {
         return userManagementDomainService.getUserInfoByEmail(userEmail);
     }
 
-//    @RequestMapping(method = RequestMethod.POST, value = "/encryptData")
-//    public void returnEncryptedData(@RequestBody String data) {
-//        String publicOrgId = utilService.getOrgIdPublicPart();
-//        PublicKey publicKey = utilService.getPublicKeyFromString(publicOrgId);
-//        System.out.println(utilService.encryptWithAsymetricKey(data, publicKey));
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST, value = "/password-hash")
-//    public void returnEncryptedHash(@RequestBody String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-//        String passwordHash = utilService.generateStorngPasswordHash(password);
-//        String publicOrgId = utilService.getOrgIdPublicPart();
-//        PublicKey publicKey = utilService.getPublicKeyFromString(publicOrgId);
-//        System.out.println(passwordHash);
-//        String encryptedHash = utilService.encryptWithAsymetricKey(passwordHash, publicKey);
-////        System.out.println(encryptedHash);
-//
-//        String privateKeyString = utilService.getOrgIdPrivatePart();
-//        PrivateKey privateKey = utilService.getPrivateKeyFromString(privateKeyString);
-////        System.out.println(utilService.decryptWithAsymetricKey(encryptedHash, privateKey));
-//    }
 }

@@ -13,7 +13,7 @@ public class AppConstant {
 
     public static final String PRODUCTION_ENVIRONMENT = "production";
 
-    public static final String ALLOW_ORIGINS = "https://dxrreleases.com|https://dxr-mob-app.web.app|http://localhost:4200";
+    public static final String ALLOW_ORIGINS = "*";
     public static final String ALLOW_ORIGIN_HEADER = "Access-Control-Allow-Origin";
 
     public static final String TRUE_VALUE = "1";
@@ -1613,40 +1613,4 @@ public class AppConstant {
 
     };
 
-//    public static final String DXR_SYS_ADMIN_ACCESS_INFO = "[\n"
-//            + "    {\n"
-//            + "        \"companyId\": \"dxr00001\",\n"
-//            + "        \"menuAccessInfo\": [\n"
-//            + "            {\n"
-//            + "                \"menuId\": \"dxrSuperAdmin\",\n"
-//            + "                \"menuTitleEng\": \"System Admin Op\",\n"
-//            + "                \"menuTitleJpn\": \"System Admin Op\",\n"
-//            + "                \"menuUrl\": \"/super-admin\",\n"
-//            + "                \"child\": [\n"
-//            + "                    {\n"
-//            + "                        \"menuId\": \"createDxrAdmin\",\n"
-//            + "                        \"menuTitleEng\": \"Create DXR Admin\",\n"
-//            + "                        \"menuTitleJpn\": \"Create DXR Admin\",\n"
-//            + "                        \"menuUrl\": \"super-admin/create-dxr-admin\",\n"
-//            + "                        \"parentSegment\": \"\"\n"
-//            + "                    },\n"
-//            + "                    {\n"
-//            + "                        \"menuId\": \"setDxrAdminAccess\",\n"
-//            + "                        \"menuTitleEng\": \"Set DXR Admin Access\",\n"
-//            + "                        \"menuTitleJpn\": \"Set DXR Admin Access\",\n"
-//            + "                        \"menuUrl\": \"super-admin/set-dxr-admin-access\",\n"
-//            + "                        \"parentSegment\": \"\"\n"
-//            + "                    },\n"
-//            + "                    {\n"
-//            + "                        \"menuId\": \"setCompanyAdminAccess\",\n"
-//            + "                        \"menuTitleEng\": \"Set Company Admin Access\",\n"
-//            + "                        \"menuTitleJpn\": \"Set Company Admin Access\",\n"
-//            + "                        \"menuUrl\": \"super-admin/set-company-admin-access\",\n"
-//            + "                        \"parentSegment\": \"\"\n"
-//            + "                    }\n"
-//            + "                ]\n"
-//            + "            }\n"
-//            + "        ]\n"
-//            + "    }\n"
-//            + "]";
 }
